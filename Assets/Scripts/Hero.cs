@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
     [SerializeField] private float speed = 5.0f;
-    [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private float jumpForce = 13f;
 
     private bool isOnGround = false;
     private Rigidbody2D body;
@@ -26,7 +25,6 @@ public class Hero : MonoBehaviour
         if (isOnGround && Input.GetButtonDown("Jump"))
             Jump();
 
-        // При нажатии "1" добавляем способность ветра
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (currentAbility == null)
@@ -49,7 +47,6 @@ public class Hero : MonoBehaviour
 
     private void Jump()
     {
-        Debug.Log("Normal Jump");
         if (currentAbility != null)
         {
             currentAbility.OnJump();
@@ -60,7 +57,6 @@ public class Hero : MonoBehaviour
         }
     }
 
-
     private void Run()
     {
         Vector3 direction = transform.right * Input.GetAxis("Horizontal");
@@ -70,7 +66,13 @@ public class Hero : MonoBehaviour
 
     private void CheckIsOnGround()
     {
-        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
-        isOnGround = collider.Length > 1;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
+        bool wasGrounded = isOnGround;
+        isOnGround = colliders.Length > 1;
+
+        if (!wasGrounded && isOnGround)
+        {
+            currentAbility?.OnLand(); // Сброс двойного прыжка, если есть
+        }
     }
 }

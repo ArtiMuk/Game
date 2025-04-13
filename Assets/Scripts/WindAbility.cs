@@ -6,7 +6,7 @@ public class WindAbility : MonoBehaviour, IAbility
     private SpriteRenderer sprite;
 
     private bool isHoldingJump;
-    private bool canDoubleJump = true;
+    private bool hasDoubleJumped = false;
 
     [SerializeField] private float fallSlowFactor = 0.2f;
     [SerializeField] private float jumpForce = 13f;
@@ -26,7 +26,7 @@ public class WindAbility : MonoBehaviour, IAbility
     {
         isHoldingJump = Input.GetButton("Jump");
 
-        if (canDash && Input.GetMouseButtonDown(0))
+        if (canDash && Input.GetKeyDown(KeyCode.E))
         {
             float direction = sprite.flipX ? -1f : 1f;
             body.linearVelocity = new Vector2(direction * dashForce, 0f);
@@ -35,18 +35,19 @@ public class WindAbility : MonoBehaviour, IAbility
             Invoke(nameof(EnableDash), dashCooldown);
         }
 
-        // Второй прыжок (на правую кнопку мыши)
-        if (canDoubleJump && Input.GetMouseButtonDown(1))
+        // Двойной прыжок только в воздухе
+        if (!hasDoubleJumped && !IsGrounded() && Input.GetButtonDown("Jump"))
         {
             Debug.Log("Double Jump!");
             body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
-            canDoubleJump = false;
+            hasDoubleJumped = true;
         }
     }
 
     public void OnFixedUpdate()
     {
-        if (isHoldingJump && body.linearVelocity.y < 0)
+        // Планирование только при удержании RightShift
+        if (Input.GetKey(KeyCode.RightShift) && body.linearVelocity.y < 0)
         {
             body.linearVelocity = new Vector2(body.linearVelocity.x, body.linearVelocity.y * fallSlowFactor);
         }
@@ -56,9 +57,19 @@ public class WindAbility : MonoBehaviour, IAbility
     {
         Debug.Log("Wind Jump!");
         body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
-        canDoubleJump = true; // Разрешаем второй прыжок после первого
+        hasDoubleJumped = false; // Сбрасываем флаг на 2й прыжок после первого
+    }
+
+    public void OnLand()
+    {
+        hasDoubleJumped = false; // Сброс при касании земли
     }
 
     private void StopDash() => body.linearVelocity = new Vector2(0f, body.linearVelocity.y);
     private void EnableDash() => canDash = true;
+
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircleAll(transform.position, 0.3f).Length > 1;
+    }
 }
