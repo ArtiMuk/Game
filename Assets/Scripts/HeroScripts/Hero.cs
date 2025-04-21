@@ -27,7 +27,12 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) // Если нажата клавиша 1
         {
-            Transform(); // Включаем способность ветра
+            ActivateWindAbility(); // Включаем способность ветра
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) // Если нажата клавиша 2
+        {
+            ActivateEarthAbility(); // Включаем способность Земли
         }
 
         currentAbility?.OnUpdate(); // Вызываем метод Update у способности, если она активна
@@ -58,14 +63,25 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         sprite.flipX = direction.x < 0.0f; // Отражаем спрайт влево, если идём налево
     }
 
-    private void Transform() // Метод включения способности
+    private void ActivateWindAbility() // Метод включения способности Ветра
     {
         if (currentAbility == null) // Если способность ещё не активна
         {
-            var wind = gameObject.AddComponent<WindAbility>(); // Добавляем компонент WindAbility на объект
-            wind.Init(body, sprite); // Инициализируем способность
-            currentAbility = wind; // Сохраняем ссылку на активную способность
+            var windAbility = gameObject.AddComponent<WindAbility>(); // Добавляем компонент WindAbility на объект
+            windAbility.Init(body, sprite); // Инициализируем способность
+            currentAbility = windAbility; // Сохраняем ссылку на активную способность
             Debug.Log("Способность ветра активирована!");
+        }
+    }
+
+    private void ActivateEarthAbility() // Метод включения способности Земли
+    {
+        if (currentAbility == null) // Если способность ещё не активна
+        {
+            var earthAbility = gameObject.AddComponent<EarthAbility>(); // Добавляем компонент EarthAbility на объект
+            earthAbility.Init(body, sprite); // Передаем jumpForce
+            currentAbility = earthAbility; // Сохраняем ссылку на активную способность
+            Debug.Log("Способность Земли активирована!");
         }
     }
 
