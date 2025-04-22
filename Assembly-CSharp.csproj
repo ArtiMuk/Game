@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\HeroScripts\WindAbility.cs" />
     <Compile Include="Assets\Scripts\HeroScripts\IAbility.cs" />
     <Compile Include="Assets\Scripts\ObjectsScripts\LevelExit.cs" />
+    <Compile Include="Assets\Scripts\ObjectsScripts\Respawn.cs" />
     <Compile Include="Assets\Scripts\HeroScripts\EarthAbility.cs" />
   </ItemGroup>
   <ItemGroup>
