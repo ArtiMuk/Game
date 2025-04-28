@@ -36,14 +36,14 @@ public class EarthAbility : MonoBehaviour, IAbility
         HandleCameraShake(); // Если активна тряска — обновляем её поведение
     }
 
-    public void OnFixedUpdate() { } 
+    public void OnFixedUpdate() { }
 
     public void OnJump()
     {
         PerformJump(); // Запускаем метод прыжка
     }
 
-    public void OnLand() 
+    public void OnLand()
     {
         StopFastFall(); // Отключаем ускоренное падение
     }
