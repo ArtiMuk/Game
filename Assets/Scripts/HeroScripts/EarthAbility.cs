@@ -10,6 +10,8 @@ public class EarthAbility : MonoBehaviour, IAbility
     [SerializeField] private float jumpForce = 13f; // Сила прыжка вверх
     [SerializeField] private float shakeIntensity = 0.05f; // Интенсивность тряски камеры
     [SerializeField] private float shakeDuration = 0.5f; // Длительность тряски камеры в секундах
+    [SerializeField] private float wallCheckDistance = 0.45f; // Дистанция для проверки стены
+    
 
     private float originalGravityScale; // Оригинальное значение гравитации, чтобы можно было возвращать после ускорения
     private bool isShaking = false; // Флаг, включена ли сейчас тряска камеры
@@ -17,6 +19,11 @@ public class EarthAbility : MonoBehaviour, IAbility
     private Vector3 originalCameraPosition; // Исходная позиция камеры до тряски
     private bool isFastFalling = false; // Флаг, падает ли игрок ускоренно
     private bool wasGroundedLastFrame = false; // Был ли игрок на земле в предыдущем кадре
+    private LayerMask wallLayer; // Маска слоя для стен
+    private bool isTouchingWall = false; // Касаемся ли стены
+    private int wallDirectionX; // Направление стены (-1 слева, 1 справа)
+
+    public void SetWallLayer(LayerMask layer) { wallLayer = layer; }
 
     public void Init(Rigidbody2D rb, SpriteRenderer sr)
     {
@@ -34,6 +41,7 @@ public class EarthAbility : MonoBehaviour, IAbility
         HandleFastFall(); // Обработка логики ускоренного падения
         HandleLandingShake(); // Проверка, нужно ли активировать тряску при приземлении
         HandleCameraShake(); // Если активна тряска — обновляем её поведение
+        HandleWallCheck();
     }
 
     public void OnFixedUpdate() { }
@@ -91,10 +99,44 @@ public class EarthAbility : MonoBehaviour, IAbility
         }
     }
 
+    private void HandleWallCheck()
+    {
+        // Проверка стены справа
+        bool wallRight = Physics2D.OverlapCircle((Vector2)transform.position + Vector2.up * 0.5f + Vector2.right * 0.3f, wallCheckDistance, wallLayer);
+        // Проверка стены слева
+        bool wallLeft = Physics2D.OverlapCircle((Vector2)transform.position + Vector2.up * 0.5f + Vector2.left * 0.3f, wallCheckDistance, wallLayer);
+
+        if (wallRight)
+        {
+            isTouchingWall = true;
+            wallDirectionX = 1;
+        }
+        else if (wallLeft)
+        {
+            isTouchingWall = true;
+            wallDirectionX = -1;
+        }
+        else
+        {
+            isTouchingWall = false;
+            wallDirectionX = 0;
+        }
+
+        if (isTouchingWall && !IsGrounded() && Input.GetButtonDown("Jump"))
+        {
+            // Прыжок от стены
+            Vector2 wallJumpDirection = new Vector2(-wallDirectionX * 0.35f, 2.4f).normalized; // Отталкивание в сторону, вверх
+            body.linearVelocity = Vector2.zero; // Сброс скорости перед прыжком
+            body.AddForce(wallJumpDirection * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
     private void PerformJump() // Прыжок вверх
     {
         Debug.Log("Earth Jump!"); // Сообщение в консоль
-        body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // Добавляем импульс вверх
+        // Обычный прыжок
+        body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        
         isFastFalling = false; // Отключаем ускоренное падение
     }
 

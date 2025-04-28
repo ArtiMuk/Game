@@ -21,6 +21,7 @@ public class AbilityManager : MonoBehaviour
 
         var earthAbility = gameObject.AddComponent<EarthAbility>();
         earthAbility.Init(body, sprite);
+        earthAbility.SetWallLayer(LayerMask.GetMask("Wall"));
         currentAbility = earthAbility;
 
         Debug.Log("Переключено на Землю");
