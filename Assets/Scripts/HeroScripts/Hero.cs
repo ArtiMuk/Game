@@ -78,15 +78,19 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         sprite.flipX = direction.x < 0.0f; // Отражаем спрайт влево, если идём налево
     }
 
-    private void CheckIsOnGround() // Проверяем, стоит ли герой на земле
+    private void CheckIsOnGround()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f); // Проверяем коллайдеры вокруг позиции героя
-        bool wasGrounded = isOnGround; // Сохраняем старое состояние
-        isOnGround = colliders.Length > 1; // Если больше одного коллайдера — герой стоит на земле
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
+        bool wasGrounded = isOnGround;
+        isOnGround = colliders.Length > 1;
 
-        if (!wasGrounded && isOnGround) // Если только что приземлился
+        if (!wasGrounded && isOnGround)
         {
-            abilityManager.LandAbility(); // Сообщаем способности о приземлении
+            abilityManager.LandAbility();
+            // При необходимости способности обрабатывают OnLand внутри себя
         }
     }
+
+    // Для внешнего доступа к состоянию "на земле"
+    public bool IsOnGround() => isOnGround;
 }

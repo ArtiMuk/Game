@@ -2,39 +2,42 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class Respawn : MonoBehaviour
 {
     private AbilityManager abilityManager;
+    private GameObject hero;
 
     private void Start()
     {
-        GameObject hero = GameObject.FindGameObjectWithTag("Player");
+        hero = GameObject.FindGameObjectWithTag("Player");
         abilityManager = hero.GetComponent<AbilityManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("trig");
-        if (other.CompareTag("Player"))
-        {
-            if (abilityManager != null && abilityManager.currentAbility is FireAbility)
-            {
-                Debug.Log("FireRespawn");
-                StartCoroutine(LoadCurLevel()); // Тут реализуй для огненного
-            }
-            else
-                StartCoroutine(LoadCurLevel());
+        if (!other.CompareTag("Player")) return;
 
-        }
+        if (abilityManager.currentAbility is FireAbility fire)
+            StartCoroutine(RespawnAtCheckpoint(fire));
+        else
+            StartCoroutine(ReloadScene());
     }
 
-    private IEnumerator LoadCurLevel()
+    private IEnumerator ReloadScene()
     {
         yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
-        int currentScene = SceneManager.GetActiveScene().buildIndex;
+    private IEnumerator RespawnAtCheckpoint(FireAbility fire)
+    {
+        yield return new WaitForSeconds(0.1f);
 
-        SceneManager.LoadScene(currentScene);
+        Vector3 cp = fire.GetCheckpoint();
+        hero.transform.position = cp;
+        var rb = hero.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.linearVelocity = Vector2.zero;
+
+        Debug.Log($"[Respawn] Teleported to checkpoint {cp}");
     }
 }
