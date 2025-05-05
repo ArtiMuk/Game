@@ -13,6 +13,7 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
     private bool isOnGround = false; // Стоит ли герой на земле
     private Rigidbody2D body;
     private SpriteRenderer sprite;
+    private Animator animator;
 
     private AbilityManager abilityManager; // Менеджер способностей
 
@@ -20,6 +21,7 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
     {
         body = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
 
         abilityManager = gameObject.AddComponent<AbilityManager>();
         abilityManager.Init(body, sprite);
@@ -27,8 +29,12 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
 
     private void Update()
     {
-        if (Input.GetButton("Horizontal")) // Проверка: нажата ли клавиша движения
-            Run(); // Вызываем метод движения
+        float horizontalInput = Input.GetAxis("Horizontal"); // Получаем ввод по горизонтали
+        animator.SetFloat("Speed", Mathf.Abs(horizontalInput)); // Устанавливаем параметр "Speed" в Animator
+        animator.SetFloat("VerticalVelocity", body.velocity.y); // Передаем вертикальную скорость в Animator
+
+        if (horizontalInput != 0) // Проверка: есть ли ввод по горизонтали
+            Run(horizontalInput); // Вызываем метод движения, передаем ввод
 
         if (isOnGround && Input.GetButtonDown("Jump")) // Прыгаем, если стоим на земле и нажата клавиша прыжка
             Jump(); // Выполняем прыжок
@@ -48,11 +54,13 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
     private void FixedUpdate()
     {
         CheckIsOnGround(); // Проверяем, на земле ли герой
+        animator.SetBool("IsGrounded", isOnGround); // Обновляем параметр IsGrounded в Animator
         abilityManager.FixedUpdateAbility();
     }
 
     private void Jump()
     {
+        animator.SetTrigger("Jump"); // Активируем триггер Jump в Animator
         if (abilityManager != null && abilityManager.HasActiveAbility())
         {
             abilityManager.JumpAbility();
@@ -63,10 +71,9 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         }
     }
 
-
-    private void Run()
+    private void Run(float horizontalInput) // Принимаем ввод как аргумент
     {
-        Vector3 direction = transform.right * Input.GetAxis("Horizontal"); // Получаем направление движения
+        Vector3 direction = transform.right * Mathf.Sign(horizontalInput); // Направление зависит от знака ввода
 
         RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + Vector2.up * 0.5f, direction, 0.4f, LayerMask.GetMask("Wall", "Neidi")); //Проверяем что перед героем нет стены
 
