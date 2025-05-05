@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
-    private IAbility currentAbility;
+    public IAbility currentAbility;
     private Rigidbody2D body;
     private SpriteRenderer sprite;
 

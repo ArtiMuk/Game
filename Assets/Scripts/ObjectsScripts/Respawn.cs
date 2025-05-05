@@ -5,11 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class Respawn : MonoBehaviour
 {
+    private AbilityManager abilityManager;
+
+    private void Start()
+    {
+        GameObject hero = GameObject.FindGameObjectWithTag("Player");
+        abilityManager = hero.GetComponent<AbilityManager>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("trig");
         if (other.CompareTag("Player"))
-            StartCoroutine(LoadCurLevel());
+        {
+            if (abilityManager != null && abilityManager.currentAbility is FireAbility)
+            {
+                Debug.Log("FireRespawn");
+                StartCoroutine(LoadCurLevel()); // Тут реализуй для огненного
+            }
+            else
+                StartCoroutine(LoadCurLevel());
+
+        }
     }
 
     private IEnumerator LoadCurLevel()
