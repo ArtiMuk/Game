@@ -68,7 +68,7 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
     {
         Vector3 direction = transform.right * Input.GetAxis("Horizontal"); // Получаем направление движения
 
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + Vector2.up * 0.5f, direction, 0.4f, LayerMask.GetMask("Wall")); //Проверяем что перед героем нет стены
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + Vector2.up * 0.5f, direction, 0.4f, LayerMask.GetMask("Wall", "Neidi")); //Проверяем что перед героем нет стены
 
         if (hit.collider == null)
             transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime); // Перемещаем героя
