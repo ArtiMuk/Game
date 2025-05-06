@@ -31,7 +31,7 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
     {
         float horizontalInput = Input.GetAxis("Horizontal"); // Получаем ввод по горизонтали
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput)); // Устанавливаем параметр "Speed" в Animator
-        animator.SetFloat("VerticalVelocity", body.velocity.y); // Передаем вертикальную скорость в Animator
+        animator.SetFloat("VerticalVelocity", body.linearVelocity.y); // Передаем вертикальную скорость в Animator
 
         if (horizontalInput != 0) // Проверка: есть ли ввод по горизонтали
             Run(horizontalInput); // Вызываем метод движения, передаем ввод
@@ -78,7 +78,9 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + Vector2.up * 0.5f, direction, 0.4f, LayerMask.GetMask("Wall", "Neidi")); //Проверяем что перед героем нет стены
 
         if (hit.collider == null)
+        {
             transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime); // Перемещаем героя
+        }
         else
             body.linearVelocity = new Vector2(0, body.linearVelocity.y);
 
