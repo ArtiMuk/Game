@@ -7,4 +7,5 @@ public interface IAbility
     void OnFixedUpdate();
     void OnJump();
     void OnLand();
+    void OnExit();
 }

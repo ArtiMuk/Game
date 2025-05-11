@@ -56,6 +56,7 @@ public class EarthAbility : MonoBehaviour, IAbility
         StopFastFall(); // Отключаем ускоренное падение
     }
 
+    public void OnExit() { }
     private void HandleFastFall() // Обработка ускоренного падения
     {
         if (Input.GetKey(KeyCode.RightShift)) // Если зажата клавиша правый Shift

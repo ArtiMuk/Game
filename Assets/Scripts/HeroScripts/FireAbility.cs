@@ -6,7 +6,7 @@ public class FireAbility : MonoBehaviour, IAbility
     private SpriteRenderer sprite;
     private Hero hero;
 
-    [SerializeField] private float jumpForce = 13f;             // Сила прыжка
+    [SerializeField] private float jumpForce = 13f;              // Сила прыжка
     [SerializeField] private float speedBoostMultiplier = 2f;    // Во сколько раз спринт
     [SerializeField] private float boostDuration = 5f;           // Длительность спринта
     [SerializeField] private float cooldownDuration = 5f;        // Перезарядка спринта
@@ -75,6 +75,18 @@ public class FireAbility : MonoBehaviour, IAbility
     }
 
     public void OnLand() { }
+
+    public void OnExit()
+    {
+        if (isBoosting)
+        {
+            DeactivateBoost();
+            isBoosting = false;
+            isOnCooldown = true;
+            cooldownTimer = cooldownDuration;
+        }
+    }
+
 
     private void ActivateBoost()
     {

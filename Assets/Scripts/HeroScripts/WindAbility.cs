@@ -39,6 +39,7 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
         PerformJump(); // Выполняем обычный прыжок и сбрасываем двойной
     }
 
+    public void OnExit() { }
     private void PerformJump() // Метод обычного прыжка
     {
         Debug.Log("Wind Jump!");

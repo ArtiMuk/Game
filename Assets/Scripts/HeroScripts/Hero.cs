@@ -48,6 +48,9 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         if (Input.GetKeyDown(KeyCode.Alpha3))
             abilityManager.SwitchToFireAbility();
 
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            abilityManager.SwitchToWaterAbility();
+
         abilityManager.UpdateAbility();
     }
 
