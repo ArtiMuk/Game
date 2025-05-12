@@ -66,8 +66,10 @@
     <Compile Include="Assets\Scripts\ObjectsScripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\HeroScripts\WindAbility.cs" />
     <Compile Include="Assets\Scripts\HeroScripts\IAbility.cs" />
+    <Compile Include="Assets\Scripts\MenuScripts\LevelSelectUI.cs" />
     <Compile Include="Assets\Scripts\HeroScripts\FireAbility.cs" />
     <Compile Include="Assets\Scripts\HeroScripts\AbilityManager.cs" />
+    <Compile Include="Assets\Scripts\MenuScripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\ObjectsScripts\LevelExit.cs" />
     <Compile Include="Assets\Scripts\ObjectsScripts\Respawn.cs" />
     <Compile Include="Assets\Scripts\HeroScripts\EarthAbility.cs" />
