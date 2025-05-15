@@ -2,172 +2,106 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
-    private IAbility currentAbility;
+    public IAbility currentAbility;
     private Rigidbody2D body;
     private SpriteRenderer sprite;
-    private Color defaultColor = Color.white;
-
-    // Cache references to pre-attached ability components
-    private EarthAbility earthAbilityComponent;
-    private WindAbility windAbilityComponent;
-    private FireAbility fireAbilityComponent;
-    private WaterAbility waterAbilityComponent;
 
     public void Init(Rigidbody2D rb, SpriteRenderer sr)
     {
         body = rb;
         sprite = sr;
-        if (sprite != null)
-        {
-            defaultColor = sprite.color;
-        }
-        else
-        {
-             Debug.LogError("SpriteRenderer is not assigned in AbilityManager Init.");
-        }
-
-        // Get references to the ability components on this GameObject
-        earthAbilityComponent = GetComponent<EarthAbility>();
-        windAbilityComponent = GetComponent<WindAbility>();
-        fireAbilityComponent = GetComponent<FireAbility>();
-        waterAbilityComponent = GetComponent<WaterAbility>();
-
-        // Call Init for all pre-attached components once at the start with the correct Rigidbody and SpriteRenderer
-        if (earthAbilityComponent) { earthAbilityComponent.Init(body, sprite); earthAbilityComponent.enabled = false; }
-        if (windAbilityComponent) { windAbilityComponent.Init(body, sprite); windAbilityComponent.enabled = false; }
-        if (fireAbilityComponent) { fireAbilityComponent.Init(body, sprite); fireAbilityComponent.enabled = false; }
-        if (waterAbilityComponent) { waterAbilityComponent.Init(body, sprite); waterAbilityComponent.enabled = false; }
-    }
-
-    private void SetAbility(IAbility ability, MonoBehaviour abilityMonoBehaviour)
-    {
-        RemoveCurrentAbility();
-        currentAbility = ability;
-        if (abilityMonoBehaviour != null) 
-        {
-            abilityMonoBehaviour.enabled = true;
-            // Init is now called once at the start for pre-attached components.
-            // If re-initialization is needed on every switch, uncomment the line below.
-            // currentAbility.Init(body, sprite); 
-        }
-        
-        // Apply color based on the type, assuming AbilityColor is a property of the interface or specific types
-        if (ability is WaterAbility water) ApplyAbilityColor(water.AbilityColor);
-        else if (ability is FireAbility fire) ApplyAbilityColor(fire.AbilityColor);
-        else if (ability is EarthAbility earth) ApplyAbilityColor(earth.AbilityColor);
-        else if (ability is WindAbility wind) ApplyAbilityColor(wind.AbilityColor);
-        else ApplyAbilityColor(defaultColor); // Fallback if type unknown or no specific color
     }
 
     public void SwitchToEarthAbility()
     {
-        if (currentAbility is EarthAbility || !earthAbilityComponent) return;
-        // earthAbilityComponent.Init(body, sprite); // Init called at start
-        SetAbility(earthAbilityComponent, earthAbilityComponent);
-        Debug.Log("Switched to Earth");
+        if (currentAbility is EarthAbility)
+            return;
+
+        RemoveCurrentAbility();
+
+        var earthAbility = gameObject.AddComponent<EarthAbility>();
+        earthAbility.Init(body, sprite);
+        earthAbility.SetWallLayer(LayerMask.GetMask("Wall"));
+        currentAbility = earthAbility;
+
+        Debug.Log("Переключено на Землю");
     }
 
     public void SwitchToWindAbility()
     {
-        if (currentAbility is WindAbility || !windAbilityComponent) return;
-        // windAbilityComponent.Init(body, sprite); // Init called at start
-        SetAbility(windAbilityComponent, windAbilityComponent);
-        Debug.Log("Switched to Wind");
+        if (currentAbility is WindAbility)
+            return;
+
+        RemoveCurrentAbility();
+
+        var windAbility = gameObject.AddComponent<WindAbility>();
+        windAbility.Init(body, sprite);
+        currentAbility = windAbility;
+
+        Debug.Log("Переключено на Ветер");
     }
 
     public void SwitchToFireAbility()
     {
-        if (currentAbility is FireAbility || !fireAbilityComponent) return;
-        // fireAbilityComponent.Init(body, sprite); // Init called at start
-        SetAbility(fireAbilityComponent, fireAbilityComponent);
-        Debug.Log("Switched to Fire");
+        if (currentAbility is FireAbility)
+            return;
+
+        RemoveCurrentAbility();
+
+        var fireAbility = gameObject.AddComponent<FireAbility>();
+        fireAbility.Init(body, sprite);
+        currentAbility = fireAbility;
+
+        Debug.Log("Переключено на Огонь");
     }
 
-<<<<<<< Updated upstream
-=======
     public void SwitchToWaterAbility()
     {
-        if (currentAbility is WaterAbility || !waterAbilityComponent) return;
-        // waterAbilityComponent.Init(body, sprite); // Init called at start
-        SetAbility(waterAbilityComponent, waterAbilityComponent);
-        Debug.Log("Switched to Water");
+        if (currentAbility is WaterAbility)
+            return;
+
+        RemoveCurrentAbility();
+
+        var waterAbility = gameObject.AddComponent<WaterAbility>();
+        waterAbility.Init(body, sprite);
+        currentAbility = waterAbility;
+
+        Debug.Log("Переключено на Воду");
     }
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
     private void RemoveCurrentAbility()
     {
         if (currentAbility != null)
         {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            Destroy(currentAbility as MonoBehaviour);
-=======
-=======
->>>>>>> Stashed changes
             currentAbility.OnExit();
-            if (currentAbility is MonoBehaviour currentMonoBehaviour)
-            {
-                currentMonoBehaviour.enabled = false;
-            }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+            Destroy(currentAbility as MonoBehaviour);
             currentAbility = null;
-            ApplyAbilityColor(defaultColor);
-        }
-    }
-
-    private void ApplyAbilityColor(Color abilityColor)
-    {
-        if (sprite != null)
-        {
-            sprite.color = abilityColor;
-        }
-        else
-        {
-            Debug.LogError("SpriteRenderer is not assigned in AbilityManager ApplyAbilityColor.");
         }
     }
 
     public void UpdateAbility()
     {
-        // Only call OnUpdate if the component is enabled and is the current ability
-        if (currentAbility != null && (currentAbility as MonoBehaviour).enabled) 
-        {
-            currentAbility.OnUpdate();
-        }
+        currentAbility?.OnUpdate();
     }
 
     public void FixedUpdateAbility()
     {
-        if (currentAbility != null && (currentAbility as MonoBehaviour).enabled) 
-        {
-            currentAbility.OnFixedUpdate();
-        }
+        currentAbility?.OnFixedUpdate();
     }
 
     public void JumpAbility()
-    { 
-        if (currentAbility != null && (currentAbility as MonoBehaviour).enabled) 
-        {
-            currentAbility.OnJump();
-        }
+    {
+        currentAbility?.OnJump();
     }
 
     public void LandAbility()
     {
-        if (currentAbility != null && (currentAbility as MonoBehaviour).enabled) 
-        {
-            currentAbility.OnLand();
-        }
+        currentAbility?.OnLand();
     }
 
     public bool HasActiveAbility()
     {
-        return currentAbility != null && (currentAbility as MonoBehaviour).enabled;
+        return currentAbility != null;
     }
 }

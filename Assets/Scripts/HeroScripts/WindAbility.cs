@@ -16,20 +16,10 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
 
     private bool canDash = true; // можно ли сейчас сделать рывок
 
-    public Color AbilityColor { get; } = Color.cyan;
-
     public void Init(Rigidbody2D rb, SpriteRenderer sr)
     {
         body = rb;
         sprite = sr;
-        if (body == null)
-        {
-            Debug.LogError("WindAbility: Rigidbody2D is null during Init.");
-        }
-        if (sprite == null)
-        {
-            Debug.LogError("WindAbility: SpriteRenderer is null during Init.");
-        }
     }
 
     public void OnUpdate()
@@ -52,7 +42,6 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
     public void OnExit() { }
     private void PerformJump() // Метод обычного прыжка
     {
-        if (body == null) return;
         Debug.Log("Wind Jump!");
         body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
         hasDoubleJumped = false; // Сбрасываем флаг двойного прыжка
@@ -60,9 +49,7 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
 
     private void HandleDoubleJump() // Обработка второго прыжка
     {
-        if (body == null || !Input.GetButtonDown("Jump")) return; 
-
-        if (!hasDoubleJumped && !IsGrounded()) // Если не прыгал дважды и в воздухе
+        if (!hasDoubleJumped && !IsGrounded() && Input.GetButtonDown("Jump")) // Если не прыгал дважды и в воздухе
         {
             Debug.Log("Double Jump!");
             body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce); // Второй прыжок вверх
@@ -72,27 +59,25 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
 
     private void HandleDash() // Обработка рывка
     {
-        if (body == null || sprite == null || !canDash || !Input.GetKeyDown(KeyCode.E)) return;
-
-        float direction = sprite.flipX ? -1f : 1f; // Определяем направление в зависимости от направления спрайта
-        body.linearVelocity = new Vector2(direction * dashForce, 0f); // Устанавливаем горизонтальную скорость рывка
-        canDash = false; // Блокируем рывок
-        Invoke(nameof(StopDash), dashDuration); // Через время dashDuration остановим рывок
-        Invoke(nameof(EnableDash), dashCooldown); // Через время dashCooldown снова разрешим рывок
+        if (canDash && Input.GetKeyDown(KeyCode.E)) // Если рывок доступен и нажата клавиша E
+        {
+            float direction = sprite.flipX ? -1f : 1f; // Определяем направление в зависимости от направления спрайта
+            body.linearVelocity = new Vector2(direction * dashForce, 0f); // Устанавливаем горизонтальную скорость рывка
+            canDash = false; // Блокируем рывок
+            Invoke(nameof(StopDash), dashDuration); // Через время dashDuration остановим рывок
+            Invoke(nameof(EnableDash), dashCooldown); // Через время dashCooldown снова разрешим рывок
+        }
     }
 
     private void HandleGlide() // Обработка планирования
     {
-        if (body == null || !Input.GetKey(KeyCode.RightShift) || !(body.linearVelocity.y < 0)) return;
-
-        body.linearVelocity = new Vector2(body.linearVelocity.x, body.linearVelocity.y * fallSlowFactor); // Замедляем падение
+        if (Input.GetKey(KeyCode.RightShift) && body.linearVelocity.y < 0) // Если зажат Shift и герой падает
+        {
+            body.linearVelocity = new Vector2(body.linearVelocity.x, body.linearVelocity.y * fallSlowFactor); // Замедляем падение
+        }
     }
 
-    private void StopDash() 
-    {
-        if (body == null) return;
-        body.linearVelocity = new Vector2(0f, body.linearVelocity.y); // Остановка рывка по горизонтали
-    }
+    private void StopDash() => body.linearVelocity = new Vector2(0f, body.linearVelocity.y); // Остановка рывка по горизонтали
 
     private void EnableDash() => canDash = true; // Разрешаем новый рывок
 

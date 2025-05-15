@@ -23,8 +23,6 @@ public class EarthAbility : MonoBehaviour, IAbility
     private bool isTouchingWall = false; // Касаемся ли стены
     private int wallDirectionX; // Направление стены (-1 слева, 1 справа)
 
-    public Color AbilityColor { get; } = new Color(0.4f, 0.25f, 0.1f); // Brown
-
     public void SetWallLayer(LayerMask layer) { wallLayer = layer; }
 
     public void Init(Rigidbody2D rb, SpriteRenderer sr)
