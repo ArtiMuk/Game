@@ -23,6 +23,9 @@ public class FireAbility : MonoBehaviour, IAbility
 
     public Color AbilityColor { get; } = new Color(1.0f, 0.3f, 0.0f); // Orange
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     public void Init(Rigidbody2D rb, SpriteRenderer sr)
     {

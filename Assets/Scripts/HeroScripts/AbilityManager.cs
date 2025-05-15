@@ -93,19 +93,28 @@ public class AbilityManager : MonoBehaviour
         Debug.Log("Switched to Water");
     }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     private void RemoveCurrentAbility()
     {
         if (currentAbility != null)
         {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             Destroy(currentAbility as MonoBehaviour);
 =======
+=======
+>>>>>>> Stashed changes
             currentAbility.OnExit();
             if (currentAbility is MonoBehaviour currentMonoBehaviour)
             {
                 currentMonoBehaviour.enabled = false;
             }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             currentAbility = null;
             ApplyAbilityColor(defaultColor);
