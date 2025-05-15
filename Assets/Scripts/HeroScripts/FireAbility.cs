@@ -17,6 +17,13 @@ public class FireAbility : MonoBehaviour, IAbility
     private bool isOnCooldown;     // Флаг: идёт перезарядка
     private float cooldownTimer;   // Таймер перезарядки
 
+<<<<<<< Updated upstream
+=======
+    private Vector3 checkpoint; // текущий чекпойнт
+
+    public Color AbilityColor { get; } = new Color(1.0f, 0.3f, 0.0f); // Orange
+
+>>>>>>> Stashed changes
     public void Init(Rigidbody2D rb, SpriteRenderer sr)
     {
         body = rb;
