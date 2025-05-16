@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -7,7 +8,11 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        int nextLevel = 0;//PlayerPrefs.GetInt("LastLevel", 1) != 1 ? PlayerPrefs.GetInt("LastLevel", 1) + 1 : 0;
+        int nextLevel = PlayerPrefs.GetInt("LastLevel", 0) + 1;
+        if (nextLevel == SceneManager.sceneCountInBuildSettings)
+        {
+            nextLevel = 1;
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextLevel);
     }
 
