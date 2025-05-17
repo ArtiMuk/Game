@@ -5,11 +5,13 @@ public class AbilityManager : MonoBehaviour
     public IAbility currentAbility;
     private Rigidbody2D body;
     private SpriteRenderer sprite;
+    private Hero hero;
 
     public void Init(Rigidbody2D rb, SpriteRenderer sr)
     {
         body = rb;
         sprite = sr;
+        hero = GetComponent<Hero>();
     }
 
     public void SwitchToEarthAbility()
@@ -24,7 +26,8 @@ public class AbilityManager : MonoBehaviour
         earthAbility.SetWallLayer(LayerMask.GetMask("Wall"));
         currentAbility = earthAbility;
 
-        Debug.Log("Переключено на Землю");
+        hero?.SetEarthMode();
+        Debug.Log("РџРµСЂРµРєР»СЋС‡РµРЅРёРµ РЅР° СЂРµР¶РёРј Р·РµРјР»Рё");
     }
 
     public void SwitchToWindAbility()
@@ -38,7 +41,8 @@ public class AbilityManager : MonoBehaviour
         windAbility.Init(body, sprite);
         currentAbility = windAbility;
 
-        Debug.Log("Переключено на Ветер");
+        hero?.SetWindMode();
+        Debug.Log("РџРµСЂРµРєР»СЋС‡РµРЅРёРµ РЅР° СЂРµР¶РёРј РІРµС‚СЂР°");
     }
 
     public void SwitchToFireAbility()
@@ -52,7 +56,8 @@ public class AbilityManager : MonoBehaviour
         fireAbility.Init(body, sprite);
         currentAbility = fireAbility;
 
-        Debug.Log("Переключено на Огонь");
+        hero?.SetFireMode();
+        Debug.Log("РџРµСЂРµРєР»СЋС‡РµРЅРёРµ РЅР° СЂРµР¶РёРј РѕРіРЅСЏ");
     }
 
     public void SwitchToWaterAbility()
@@ -66,7 +71,8 @@ public class AbilityManager : MonoBehaviour
         waterAbility.Init(body, sprite);
         currentAbility = waterAbility;
 
-        Debug.Log("Переключено на Воду");
+        hero?.SetWaterMode();
+        Debug.Log("РџРµСЂРµРєР»СЋС‡РµРЅРёРµ РЅР° СЂРµР¶РёРј РІРѕРґС‹");
     }
 
 
