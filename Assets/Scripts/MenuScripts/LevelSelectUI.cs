@@ -4,15 +4,17 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelectUI : MonoBehaviour
 {
-    public GameObject buttonPrefab;
-    public Transform buttonParent;
+    [SerializeField] private GameObject buttonPrefab;
+    [SerializeField] private Transform buttonParent;
+
     public static int totalLevels = 3;
 
     void Start()
     {
         for (int i = 1; i <= totalLevels; i++)
-        {          
-            if (i <= PlayerPrefs.GetInt("LastLevel", 0) + 1) {
+        {
+            if (i <= PlayerPrefs.GetInt("LastLevel", 0) + 1)
+            {
                 int levelIndex = i;
 
                 GameObject btn = Instantiate(buttonPrefab, buttonParent);
@@ -26,3 +28,44 @@ public class LevelSelectUI : MonoBehaviour
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+/*using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class LevelSelectUI : MonoBehaviour
+{
+    [SerializeField] private GameObject buttonPrefab;
+    [SerializeField] private Transform buttonParent;
+    [SerializeField] private Sprite[] levelsSprites;
+
+    public static int totalLevels = 3;
+
+    void Start()
+    {
+        for (int i = 1; i <= totalLevels; i++)
+        {          
+            if (i <= PlayerPrefs.GetInt("LastLevel", 0) + 1) {
+                int levelIndex = i;
+
+                GameObject btn = Instantiate(buttonPrefab, buttonParent);
+                btn.GetComponent<Image>().sprite = levelsSprites[levelIndex - 1];
+
+                btn.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    SceneManager.LoadScene(levelIndex);
+                });
+            }
+        }
+    }
+}*/

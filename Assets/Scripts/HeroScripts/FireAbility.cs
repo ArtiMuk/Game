@@ -140,7 +140,7 @@ public class FireAbility : MonoBehaviour, IAbility
             Destroy(currentFlag);
         }
 
-        currentFlag = Instantiate(flagPrefab, position + new Vector3(0f, 0.2f, 0f), Quaternion.identity);
+        currentFlag = Instantiate(flagPrefab, position + new Vector3(0f, 0.4f, 0f), Quaternion.identity);
         Debug.Log($"[Fire] Флаг установлен на позиции {position}");
     }
 }

@@ -251,7 +251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3061711640359059092, guid: e4276f8d878a1dc42a992f79f800dfa9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.47
+      value: -6.8
       objectReference: {fileID: 0}
     - target: {fileID: 3061711640359059092, guid: e4276f8d878a1dc42a992f79f800dfa9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4581,7 +4581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 235334408942344289, guid: 742226dbe29b7ff4c933115e8691ccb3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.73
+      value: -5.1
       objectReference: {fileID: 0}
     - target: {fileID: 235334408942344289, guid: 742226dbe29b7ff4c933115e8691ccb3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4619,10 +4619,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
-    - target: {fileID: 4744281193264976944, guid: 742226dbe29b7ff4c933115e8691ccb3, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -6367560908665664636, guid: 970d7444123888c44bddae8bf347399c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
