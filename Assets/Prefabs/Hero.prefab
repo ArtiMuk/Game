@@ -233,3 +233,4 @@ MonoBehaviour:
   speed: 5
   jumpForce: 13
   waterPuddleSprite: {fileID: 1819811312189669638, guid: 872c939837eb61e499817ec1195eba38, type: 3}
+  fireCheckpointFlagPrefab: {fileID: 2320282100253839257, guid: b24c2f032995c9340a87c2d7b09ba8c0, type: 3}

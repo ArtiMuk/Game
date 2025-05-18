@@ -5,8 +5,8 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
     private Rigidbody2D body;
     private SpriteRenderer sprite;
 
-    private bool isHoldingJump; // Зажата ли клавиша прыжка
-    private bool hasDoubleJumped = false; // Был ли уже выполнен двойной прыжок
+    private bool isHoldingJump;
+    private static bool hasDoubleJumped = false;
 
     [SerializeField] private float fallSlowFactor = 0.75f; // Множитель замедления падения при планировании
     [SerializeField] private float jumpForce = 13f; // Сила прыжка
@@ -16,10 +16,24 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
 
     private bool canDash = true; // можно ли сейчас сделать рывок
 
+    void OnEnable()
+    {
+        // Если способность активируется, когда персонаж на земле,
+        // сбрасываем флаг двойного прыжка.
+        if (body != null && IsGrounded())
+        {
+            hasDoubleJumped = false;
+        }
+    }
+
     public void Init(Rigidbody2D rb, SpriteRenderer sr)
     {
         body = rb;
         sprite = sr;
+        if (IsGrounded())
+        {
+            hasDoubleJumped = false;
+        }
     }
 
     public void OnUpdate()
@@ -31,7 +45,7 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
 
     public void OnFixedUpdate()
     {
-        HandleGlide(); // Обработка планирования
+        HandleGlide();
     }
 
     public void OnJump() // Вызывается при обычном прыжке
@@ -39,19 +53,19 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
         PerformJump(); // Выполняем обычный прыжок и сбрасываем двойной
     }
 
-    public void OnExit() { }
     private void PerformJump() // Метод обычного прыжка
     {
-        Debug.Log("Wind Jump!");
         body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
         hasDoubleJumped = false; // Сбрасываем флаг двойного прыжка
     }
+
+    public void OnExit() { }
+
 
     private void HandleDoubleJump() // Обработка второго прыжка
     {
         if (!hasDoubleJumped && !IsGrounded() && Input.GetButtonDown("Jump")) // Если не прыгал дважды и в воздухе
         {
-            Debug.Log("Double Jump!");
             body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce); // Второй прыжок вверх
             hasDoubleJumped = true; // Помечаем, что двойной прыжок выполнен
         }
@@ -77,14 +91,24 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
         }
     }
 
-    private void StopDash() => body.linearVelocity = new Vector2(0f, body.linearVelocity.y); // Остановка рывка по горизонтали
+    private void StopDash()
+    {
+        body.linearVelocity = new Vector2(0f, body.linearVelocity.y); // Остановка рывка по горизонтали
+    }
 
-    private void EnableDash() => canDash = true; // Разрешаем новый рывок
+    private void EnableDash()
+    {
+        canDash = true; // Разрешаем новый рывок
+    }
 
-    public void OnLand() => hasDoubleJumped = false; // При приземлении сбрасываем возможность двойного прыжка
+    public void OnLand()
+    {
+        hasDoubleJumped = false; // При приземлении сбрасываем возможность двойного прыжка
+    }
 
     private bool IsGrounded() // Проверка, стоит ли персонаж на земле
     {
+        if (transform == null) return false; 
         return Physics2D.OverlapCircleAll(transform.position, 0.3f).Length > 1; // Если вокруг коллайдеров больше одного (включая себя) — значит на земле
     }
 }
