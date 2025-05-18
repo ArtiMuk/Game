@@ -232,4 +232,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 13
-  waterPuddleSprite: {fileID: -2528062349855705914, guid: 872c939837eb61e499817ec1195eba38, type: 3}
+  waterPuddleSprite: {fileID: 1819811312189669638, guid: 872c939837eb61e499817ec1195eba38, type: 3}

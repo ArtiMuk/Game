@@ -90,7 +90,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 26
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -156,11 +156,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 127
-        width: 81
-        height: 49
+        y: 128
+        width: 80
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -177,12 +177,12 @@ TextureImporter:
       name: Terrain (16x16)_1
       rect:
         serializedVersion: 2
-        x: 95
-        y: 127
-        width: 82
-        height: 49
+        x: 96
+        y: 128
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -199,12 +199,12 @@ TextureImporter:
       name: Terrain (16x16)_2
       rect:
         serializedVersion: 2
-        x: 191
-        y: 127
-        width: 66
-        height: 49
+        x: 192
+        y: 128
+        width: 64
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -221,12 +221,12 @@ TextureImporter:
       name: Terrain (16x16)_3
       rect:
         serializedVersion: 2
-        x: 271
-        y: 170
-        width: 50
-        height: 6
+        x: 272
+        y: 171
+        width: 48
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -243,12 +243,12 @@ TextureImporter:
       name: Terrain (16x16)_4
       rect:
         serializedVersion: 2
-        x: 271
-        y: 154
-        width: 50
-        height: 7
+        x: 272
+        y: 155
+        width: 48
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -265,12 +265,12 @@ TextureImporter:
       name: Terrain (16x16)_5
       rect:
         serializedVersion: 2
-        x: 271
-        y: 138
-        width: 50
-        height: 7
+        x: 272
+        y: 139
+        width: 48
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -288,11 +288,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 63
-        width: 81
-        height: 50
+        y: 64
+        width: 80
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -309,12 +309,12 @@ TextureImporter:
       name: Terrain (16x16)_7
       rect:
         serializedVersion: 2
-        x: 95
-        y: 63
-        width: 82
-        height: 50
+        x: 96
+        y: 64
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -331,12 +331,12 @@ TextureImporter:
       name: Terrain (16x16)_8
       rect:
         serializedVersion: 2
-        x: 191
-        y: 63
-        width: 66
-        height: 50
+        x: 192
+        y: 64
+        width: 64
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -353,12 +353,12 @@ TextureImporter:
       name: Terrain (16x16)_9
       rect:
         serializedVersion: 2
-        x: 271
-        y: 63
-        width: 81
-        height: 50
+        x: 272
+        y: 64
+        width: 80
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -377,10 +377,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 81
-        height: 49
+        width: 80
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -397,12 +397,12 @@ TextureImporter:
       name: Terrain (16x16)_11
       rect:
         serializedVersion: 2
-        x: 95
+        x: 96
         y: 0
-        width: 82
-        height: 49
+        width: 80
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -419,12 +419,12 @@ TextureImporter:
       name: Terrain (16x16)_12
       rect:
         serializedVersion: 2
-        x: 191
+        x: 192
         y: 0
-        width: 66
-        height: 49
+        width: 64
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -441,12 +441,12 @@ TextureImporter:
       name: Terrain (16x16)_13
       rect:
         serializedVersion: 2
-        x: 271
+        x: 272
         y: 0
-        width: 66
-        height: 49
+        width: 64
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -463,7 +463,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 180dd0bb2df2f2f4fa0eb63548c7fa2c
     internalID: 0
     vertices: []
     indices: 
