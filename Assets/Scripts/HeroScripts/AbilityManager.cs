@@ -16,6 +16,11 @@ public class AbilityManager : MonoBehaviour
 
     public void SwitchToEarthAbility()
     {
+        if (currentAbility is WaterAbility waterPuddle && waterPuddle.IsInPuddleForm())
+        {
+            Debug.Log("Cannot switch ability: Currently in puddle form.");
+            return;
+        }
         if (currentAbility is EarthAbility)
             return;
 
@@ -32,6 +37,11 @@ public class AbilityManager : MonoBehaviour
 
     public void SwitchToWindAbility()
     {
+        if (currentAbility is WaterAbility waterPuddle && waterPuddle.IsInPuddleForm())
+        {
+            Debug.Log("Cannot switch ability: Currently in puddle form.");
+            return;
+        }
         if (currentAbility is WindAbility)
             return;
 
@@ -47,6 +57,11 @@ public class AbilityManager : MonoBehaviour
 
     public void SwitchToFireAbility()
     {
+        if (currentAbility is WaterAbility waterPuddle && waterPuddle.IsInPuddleForm())
+        {
+            Debug.Log("Cannot switch ability: Currently in puddle form.");
+            return;
+        }
         if (currentAbility is FireAbility)
             return;
 
@@ -69,6 +84,14 @@ public class AbilityManager : MonoBehaviour
 
         var waterAbility = gameObject.AddComponent<WaterAbility>();
         waterAbility.Init(body, sprite);
+        if (hero != null && hero.waterPuddleSprite != null)
+        {
+            waterAbility.SetPuddleSprite(hero.waterPuddleSprite);
+        }
+        else
+        {
+            Debug.LogError("AbilityManager: Hero component or hero.waterPuddleSprite is null. Cannot set puddle sprite for WaterAbility.");
+        }
         currentAbility = waterAbility;
 
         hero?.SetWaterMode();

@@ -17,6 +17,9 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
 
     private AbilityManager abilityManager; // Менеджер способностей
 
+    [Header("Ability Specific Assets")]
+    [SerializeField] public Sprite waterPuddleSprite;
+
     public enum HeroMode { Default, Wind, Earth, Fire, Water }
     private HeroMode currentMode = HeroMode.Default;
 
