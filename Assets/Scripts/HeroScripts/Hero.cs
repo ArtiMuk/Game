@@ -20,6 +20,8 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
     [Header("Ability Specific Assets")]
     [SerializeField] public Sprite waterPuddleSprite;
 
+    [SerializeField] public GameObject fireCheckpointFlagPrefab;
+
     public enum HeroMode { Default, Wind, Earth, Fire, Water }
     private HeroMode currentMode = HeroMode.Default;
 

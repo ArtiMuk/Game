@@ -8,7 +8,7 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
     private bool isHoldingJump; // Зажата ли клавиша прыжка
     private bool hasDoubleJumped = false; // Был ли уже выполнен двойной прыжок
 
-    [SerializeField] private float fallSlowFactor = 0.2f; // Множитель замедления падения при планировании
+    [SerializeField] private float fallSlowFactor = 0.75f; // Множитель замедления падения при планировании
     [SerializeField] private float jumpForce = 13f; // Сила прыжка
     [SerializeField] private float dashForce = 30f; // Сила рывка
     [SerializeField] private float dashCooldown = 0.8f; // Время перезарядки рывка

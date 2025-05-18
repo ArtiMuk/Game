@@ -69,6 +69,16 @@ public class AbilityManager : MonoBehaviour
 
         var fireAbility = gameObject.AddComponent<FireAbility>();
         fireAbility.Init(body, sprite);
+
+        if (hero != null && hero.fireCheckpointFlagPrefab != null)
+        {
+            fireAbility.SetFlagPrefab(hero.fireCheckpointFlagPrefab);
+        }
+        else
+        {
+            Debug.LogError("AbilityManager: Hero component or hero.fireCheckpointFlagPrefab is null. Cannot set flag prefab for FireAbility.");
+        }
+
         currentAbility = fireAbility;
 
         hero?.SetFireMode();
