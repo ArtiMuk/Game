@@ -1,54 +1,63 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FireAbility : MonoBehaviour, IAbility
 {
     private Rigidbody2D body;
     private SpriteRenderer sprite;
+
+    private GameObject flagPrefab;
+    private GameObject currentFlag;
     private Hero hero;
 
-    [SerializeField] private float jumpForce = 13f;              // Сила прыжка
-    [SerializeField] private float speedBoostMultiplier = 2f;    // Во сколько раз спринт
-    [SerializeField] private float boostDuration = 5f;           // Длительность спринта
-    [SerializeField] private float cooldownDuration = 5f;        // Перезарядка спринта
+    [SerializeField] private float jumpForce = 13f;
+    [SerializeField] private float speedBoostMultiplier = 2f;
+    [SerializeField] private float boostDuration = 5f;
+    [SerializeField] private float cooldownDuration = 5f;
 
-    private float originalSpeed;   // Запомним скорость, чтобы вернуть
-    private bool isBoosting;       // Флаг: ускорение активно
-    private float boostTimer;      // Таймер ускорения
-    private bool isOnCooldown;     // Флаг: идёт перезарядка
-    private float cooldownTimer;   // Таймер перезарядки
+    private float originalSpeed;
+    private bool isBoosting;
+    private float boostTimer;
+    private bool isOnCooldown;
+    private float cooldownTimer;
 
-    private Vector3 checkpoint; // текущий чекпойнт
+    private List<Vector3> checkpoints = new List<Vector3>(3);
 
     public void Init(Rigidbody2D rb, SpriteRenderer sr)
     {
         body = rb;
         sprite = sr;
-        hero = rb.GetComponent<Hero>();      // Ссылка на скрипт Hero
-        originalSpeed = hero.Speed;          // Запоминаем исходную скорость
-        checkpoint = hero.transform.position; // стартовый
+        hero = rb.GetComponent<Hero>();
+        originalSpeed = hero.Speed;
+
+        // Стартовый чекпойнт (позиция старта уровня)
+        checkpoints.Add(hero.transform.position);
+
+        PlaceFlagAt(hero.transform.position);
+    }
+
+    public void SetFlagPrefab(GameObject prefab)
+    {
+        flagPrefab = prefab;
     }
 
     public void OnUpdate()
     {
-        // Нажатие E запускает спринт один раз
         if (Input.GetKeyDown(KeyCode.E) && !isBoosting && !isOnCooldown)
         {
             ActivateBoost();
         }
 
-        // Отсчёт времени спринта
         if (isBoosting)
         {
             boostTimer -= Time.deltaTime;
             if (boostTimer <= 0f)
             {
                 DeactivateBoost();
-                // после окончания спринта сразу стартует перезарядка
                 isOnCooldown = true;
                 cooldownTimer = cooldownDuration;
             }
         }
-        // Отсчёт перезарядки
         else if (isOnCooldown)
         {
             cooldownTimer -= Time.deltaTime;
@@ -60,17 +69,24 @@ public class FireAbility : MonoBehaviour, IAbility
 
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
-            checkpoint = hero.transform.position;
-            Debug.Log($"[Fire] Checkpoint set at {checkpoint}");
-        }
+            if (checkpoints.Count >= 3)
+            {
+                Debug.Log("[Fire] Максимум 2 чекпойнта установлено. Новые чекпойнты недоступны.");
+                return;
+            }
 
+            Vector3 newCheckpoint = hero.transform.position;
+            checkpoints.Add(newCheckpoint);
+            Debug.Log($"[Fire] Checkpoint set at {newCheckpoint}");
+
+            PlaceFlagAt(newCheckpoint);
+        }
     }
 
     public void OnFixedUpdate() { }
 
     public void OnJump()
     {
-        // Обычный прыжок
         body.linearVelocity = new Vector2(body.linearVelocity.x, jumpForce);
     }
 
@@ -87,23 +103,44 @@ public class FireAbility : MonoBehaviour, IAbility
         }
     }
 
-
     private void ActivateBoost()
     {
         isBoosting = true;
         boostTimer = boostDuration;
-        hero.Speed = originalSpeed * speedBoostMultiplier; // Удваиваем скорость бега
+        hero.Speed = originalSpeed * speedBoostMultiplier;
         Debug.Log("Fire sprint activated!");
     }
 
     private void DeactivateBoost()
     {
         isBoosting = false;
-        hero.Speed = originalSpeed; // Возвращаем исходную скорость
+        hero.Speed = originalSpeed;
         Debug.Log("Fire sprint ended.");
     }
+
     public Vector3 GetCheckpoint()
     {
-        return checkpoint;
+        // Возвращаем последний чекпойнт (последний в списке)
+        if (checkpoints.Count == 0)
+            return hero.transform.position;
+
+        return checkpoints[checkpoints.Count - 1];
+    }
+
+    private void PlaceFlagAt(Vector3 position)
+    {
+        if (flagPrefab == null)
+        {
+            Debug.LogWarning("[Fire] Флаг-префаб не установлен.");
+            return;
+        }
+
+        if (currentFlag != null)
+        {
+            Destroy(currentFlag);
+        }
+
+        currentFlag = Instantiate(flagPrefab, position + new Vector3(0f, 0.2f, 0f), Quaternion.identity);
+        Debug.Log($"[Fire] Флаг установлен на позиции {position}");
     }
 }
