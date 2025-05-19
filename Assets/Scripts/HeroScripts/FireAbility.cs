@@ -31,7 +31,8 @@ public class FireAbility : MonoBehaviour, IAbility
         originalSpeed = hero.Speed;
 
         // Стартовый чекпойнт (позиция старта уровня)
-        checkpoints.Add(hero.transform.position);
+        GameObject startCheck = GameObject.FindGameObjectWithTag("CheckForFire");
+        checkpoints.Add(startCheck.transform.position);
 
         PlaceFlagAt(hero.transform.position);
     }
