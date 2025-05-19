@@ -151,5 +151,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  camSpeed: 5
-  offset: {x: 0, y: 2.5, z: -11}
+  camSpeed: 18
+  offset: {x: 0, y: 0.3, z: -11}

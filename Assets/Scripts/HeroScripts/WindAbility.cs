@@ -11,7 +11,7 @@ public class WindAbility : MonoBehaviour, IAbility // Класс способн�
     [SerializeField] private float fallSlowFactor = 0.75f; // Множитель замедления падения при планировании
     [SerializeField] private float jumpForce = 13f; // Сила прыжка
     [SerializeField] private float dashForce = 30f; // Сила рывка
-    [SerializeField] private float dashCooldown = 0.8f; // Время перезарядки рывка
+    [SerializeField] private float dashCooldown = 1.5f; // Время перезарядки рывка
     [SerializeField] private float dashDuration = 0.1f; // Продолжительность рывка
 
     private bool canDash = true; // можно ли сейчас сделать рывок
