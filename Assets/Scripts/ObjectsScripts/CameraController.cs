@@ -3,8 +3,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform hero;
-    [SerializeField] private float camSpeed = 5f; // Скорость, с которой камера следует за героем
-    [SerializeField] private Vector3 offset = new Vector3(0, -0.5f, -11); // Смещение камеры относительно позиции героя (x, y, z)
+    [SerializeField] private float camSpeed = 18f; // Скорость, с которой камера следует за героем
+    [SerializeField] private Vector3 offset = new Vector3(0, 0.3f, -11); // Смещение камеры относительно позиции героя (x, y, z)
 
     private Vector3 position;
 
