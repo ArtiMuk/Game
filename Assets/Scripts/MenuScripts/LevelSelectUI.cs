@@ -7,7 +7,7 @@ public class LevelSelectUI : MonoBehaviour
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private Transform buttonParent;
 
-    public static int totalLevels = 3;
+    public static int totalLevels = 5;
 
     void Start()
     {
