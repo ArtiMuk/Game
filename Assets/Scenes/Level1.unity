@@ -1474,6 +1474,10 @@ PrefabInstance:
       propertyPath: menuPanel
       value: 
       objectReference: {fileID: 646168626}
+    - target: {fileID: 1752187345388698401, guid: 246243d835b888c4e95a33eee4104b82, type: 3}
+      propertyPath: settingsPanel
+      value: 
+      objectReference: {fileID: 1192013052}
     - target: {fileID: 3003317000383492192, guid: 246243d835b888c4e95a33eee4104b82, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.7572653
@@ -1977,6 +1981,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 670219275}
+    - target: {fileID: 947748419275760122, guid: 995032f3296f2304ca84c0b5f01e0c80, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1407793568}
+    - target: {fileID: 947748419275760122, guid: 995032f3296f2304ca84c0b5f01e0c80, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackToMenuFromSettings
+      objectReference: {fileID: 0}
     - target: {fileID: 1831071886852706468, guid: 995032f3296f2304ca84c0b5f01e0c80, type: 3}
       propertyPath: m_Name
       value: Background
@@ -2060,6 +2072,14 @@ PrefabInstance:
     - target: {fileID: 2775471873913441187, guid: 995032f3296f2304ca84c0b5f01e0c80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124370734919056471, guid: 995032f3296f2304ca84c0b5f01e0c80, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1407793568}
+    - target: {fileID: 8124370734919056471, guid: 995032f3296f2304ca84c0b5f01e0c80, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeSettingsPanelMode
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2760,6 +2780,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8072720088469144818, guid: 2056cce270047bf4aac241a368dc9b59, type: 3}
   m_PrefabInstance: {fileID: 654143935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1192013052 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7394546702884027157, guid: 995032f3296f2304ca84c0b5f01e0c80, type: 3}
+  m_PrefabInstance: {fileID: 846712362}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1231017823
 PrefabInstance:
