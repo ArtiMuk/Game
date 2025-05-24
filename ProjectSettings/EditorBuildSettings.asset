@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 6ae6b938f98d6ce4a850125bb45c236e
   - enabled: 1
-    path: Assets/Scenes/Level00.unity
+    path: Assets/Scenes/EducationWind.unity
     guid: eacf64f16f2ea624ca57c47492277365
   - enabled: 1
-    path: Assets/Scenes/Level001.unity
+    path: Assets/Scenes/EducationEarth.unity
     guid: ac262727d1ca1cd4f8289d8d1cb36c32
+  - enabled: 1
+    path: Assets/Scenes/EducationFire.unity
+    guid: 4a635d088a5c171429e23c80dbe1183f
   - enabled: 1
     path: Assets/Scenes/Level0.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02

@@ -11,9 +11,9 @@ public class FireAbility : MonoBehaviour, IAbility
     private Hero hero;
 
     [SerializeField] private float jumpForce = 13f;
-    [SerializeField] private float speedBoostMultiplier = 2f;
+    [SerializeField] private float speedBoostMultiplier = 3.5f;
     [SerializeField] private float boostDuration = 5f;
-    [SerializeField] private float cooldownDuration = 5f;
+    [SerializeField] private float cooldownDuration = 3f;
 
     private float originalSpeed;
     private bool isBoosting;

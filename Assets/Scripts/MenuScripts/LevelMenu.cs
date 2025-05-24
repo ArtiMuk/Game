@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LevelMenu : MonoBehaviour
 {
-    public GameObject menuPanel;
+    [SerializeField] private GameObject menuPanel;
 
     private void Update()
     {
