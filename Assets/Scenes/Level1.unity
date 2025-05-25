@@ -131,6 +131,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuBtnCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2537318392541590394, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -2131.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537318392541590394, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -904.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537318392541590394, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1028.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537318392541590394, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 428.24
+      objectReference: {fileID: 0}
     - target: {fileID: 2964575292041197965, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

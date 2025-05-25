@@ -35137,8 +35137,16 @@ PrefabInstance:
       value: MenuBtnCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 2537318392541590394, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -2134.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537318392541590394, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -898.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537318392541590394, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1021
+      value: 1023
       objectReference: {fileID: 0}
     - target: {fileID: 2537318392541590394, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -35232,6 +35240,10 @@ PrefabInstance:
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5872999087685849983, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8414211256663133243, guid: 0e7245433b058f74aa52e0374156aae8, type: 3}
       propertyPath: m_Camera
       value: 
@@ -35292,6 +35304,22 @@ PrefabInstance:
     - target: {fileID: 3136296938928567469, guid: 742226dbe29b7ff4c933115e8691ccb3, type: 3}
       propertyPath: m_Name
       value: Hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745856227228186444, guid: 742226dbe29b7ff4c933115e8691ccb3, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5745856227228186444, guid: 742226dbe29b7ff4c933115e8691ccb3, type: 3}
+      propertyPath: waterPuddleSprite
+      value: 
+      objectReference: {fileID: 1819811312189669638, guid: 872c939837eb61e499817ec1195eba38, type: 3}
+    - target: {fileID: 5745856227228186444, guid: 742226dbe29b7ff4c933115e8691ccb3, type: 3}
+      propertyPath: fireCheckpointFlagPrefab
+      value: 
+      objectReference: {fileID: 2320282100253839257, guid: b24c2f032995c9340a87c2d7b09ba8c0, type: 3}
+    - target: {fileID: 8186389443434031441, guid: 742226dbe29b7ff4c933115e8691ccb3, type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
