@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 19317233503384887}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.2657, y: 2.2657, z: 2.9546995}
+  m_LocalScale: {x: 0.11582809, y: 0.11582809, z: 0.1510514}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4636514063514366702}
@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1019, y: 420}
-  m_SizeDelta: {x: -2123.55, y: -911.55}
+  m_AnchoredPosition: {x: 1045, y: 429}
+  m_SizeDelta: {x: -1412.42, y: -223.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6370068827203255151
 CanvasRenderer:
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1752187345388698401, guid: 246243d835b888c4e95a33eee4104b82, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LevelMenu, Assembly-CSharp
         m_MethodName: ChangeMenuMode
         m_Mode: 1
@@ -182,7 +182,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 4903590027342078496, guid: 19114872a0dd136479b6dfc4f28c27a5, type: 3}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
