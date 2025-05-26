@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Базовый интерфейс для всех способностей героя
 public interface IAbility
 {
     void Init(Rigidbody2D rb, SpriteRenderer sr);

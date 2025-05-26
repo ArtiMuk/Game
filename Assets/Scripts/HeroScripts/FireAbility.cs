@@ -25,6 +25,7 @@ public class FireAbility : MonoBehaviour, IAbility
     private bool isOnCooldown;
     private float cooldownTimer;
 
+    // Локальный список чекпоинтов
     private List<Vector3> checkpoints = new List<Vector3>(3);
 
     private void OnEnable()
@@ -76,6 +77,7 @@ public class FireAbility : MonoBehaviour, IAbility
         }
     }
 
+    // Установка префаба флага
     public void SetFlagPrefab(GameObject prefab)
     {
         flagPrefab = prefab;
@@ -83,11 +85,13 @@ public class FireAbility : MonoBehaviour, IAbility
 
     public void OnUpdate()
     {
+        // Активация ускорения по нажатию E
         if (Input.GetKeyDown(KeyCode.E) && !isBoosting && !isOnCooldown)
         {
             ActivateBoost();
         }
 
+        // Обработка активного ускорения
         if (isBoosting)
         {
             boostTimer -= Time.deltaTime;
@@ -98,6 +102,8 @@ public class FireAbility : MonoBehaviour, IAbility
                 cooldownTimer = cooldownDuration;
             }
         }
+
+        // Обработка перезарядки
         else if (isOnCooldown)
         {
             cooldownTimer -= Time.deltaTime;
@@ -107,6 +113,7 @@ public class FireAbility : MonoBehaviour, IAbility
             }
         }
 
+        // Установка чекпоинта по нажатию RightShift
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
             if (totalCheckpoints >= 2)
@@ -133,6 +140,7 @@ public class FireAbility : MonoBehaviour, IAbility
 
     public void OnLand() { }
 
+    // Вызывается при отключении способности
     public void OnExit()
     {
         if (isBoosting)
@@ -164,6 +172,7 @@ public class FireAbility : MonoBehaviour, IAbility
         Debug.Log("Fire sprint ended.");
     }
 
+    // Получение последнего чекпоинта
     public Vector3 GetCheckpoint()
     {
         if (checkpoints.Count == 0)
@@ -172,6 +181,7 @@ public class FireAbility : MonoBehaviour, IAbility
         return checkpoints[checkpoints.Count - 1];
     }
 
+    // Установка визуального флага чекпоинта
     private void PlaceFlagAt(Vector3 position)
     {
         if (flagPrefab == null)

@@ -14,8 +14,10 @@ public class AbilityManager : MonoBehaviour
         hero = GetComponent<Hero>();
     }
 
+    // Переключение на земляную способность
     public void SwitchToEarthAbility()
     {
+        // Проверка, находится ли водная способность в форме лужи
         if (currentAbility is WaterAbility waterPuddle && waterPuddle.IsInPuddleForm())
         {
             Debug.Log("Cannot switch ability: Currently in puddle form.");
@@ -26,6 +28,7 @@ public class AbilityManager : MonoBehaviour
 
         RemoveCurrentAbility();
 
+        // Создаем и инициализируем земляную способность
         var earthAbility = gameObject.AddComponent<EarthAbility>();
         earthAbility.Init(body, sprite);
         earthAbility.SetWallLayer(LayerMask.GetMask("Wall"));
@@ -35,6 +38,7 @@ public class AbilityManager : MonoBehaviour
         Debug.Log("Переключение на режим земли");
     }
 
+    // Переключение на ветряную способность
     public void SwitchToWindAbility()
     {
         if (currentAbility is WaterAbility waterPuddle && waterPuddle.IsInPuddleForm())
@@ -55,6 +59,7 @@ public class AbilityManager : MonoBehaviour
         Debug.Log("Переключение на режим ветра");
     }
 
+    // Переключение на огненную способность
     public void SwitchToFireAbility()
     {
         if (currentAbility is WaterAbility waterPuddle && waterPuddle.IsInPuddleForm())
@@ -70,6 +75,7 @@ public class AbilityManager : MonoBehaviour
         var fireAbility = gameObject.AddComponent<FireAbility>();
         fireAbility.Init(body, sprite);
 
+        // Устанавливаем префаб флажка для создания контрольных точек
         if (hero != null && hero.fireCheckpointFlagPrefab != null)
         {
             fireAbility.SetFlagPrefab(hero.fireCheckpointFlagPrefab);
@@ -85,6 +91,7 @@ public class AbilityManager : MonoBehaviour
         Debug.Log("Переключение на режим огня");
     }
 
+    // Переключение на водную способность
     public void SwitchToWaterAbility()
     {
         if (currentAbility is WaterAbility)
@@ -94,6 +101,7 @@ public class AbilityManager : MonoBehaviour
 
         var waterAbility = gameObject.AddComponent<WaterAbility>();
         waterAbility.Init(body, sprite);
+        // Устанавливаем спрайт для формы лужи
         if (hero != null && hero.waterPuddleSprite != null)
         {
             waterAbility.SetPuddleSprite(hero.waterPuddleSprite);
@@ -108,7 +116,7 @@ public class AbilityManager : MonoBehaviour
         Debug.Log("Переключение на режим воды");
     }
 
-
+    // Удаление текущей способности
     private void RemoveCurrentAbility()
     {
         if (currentAbility != null)
@@ -119,11 +127,13 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
+    // Обновление способности каждый кадр
     public void UpdateAbility()
     {
         currentAbility?.OnUpdate();
     }
 
+    // Обновление способности в фиксированном кадре
     public void FixedUpdateAbility()
     {
         currentAbility?.OnFixedUpdate();

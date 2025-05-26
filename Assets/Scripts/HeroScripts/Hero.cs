@@ -25,6 +25,7 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
     public enum HeroMode { Default, Wind, Earth, Fire, Water }
     private HeroMode currentMode = HeroMode.Default;
 
+    // Цвета для каждого режима
     private static readonly System.Collections.Generic.Dictionary<HeroMode, Color> modeColors = new()
     {
         { HeroMode.Default, Color.white },
@@ -34,6 +35,7 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         { HeroMode.Water, new Color(0.2f, 0.5f, 1f) }
     };
 
+    // Установка режима с изменением цвета
     public void SetMode(HeroMode mode)
     {
         currentMode = mode;
@@ -48,12 +50,14 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
     public void SetWaterMode() => SetMode(HeroMode.Water);
     public void SetDefaultMode() => SetMode(HeroMode.Default);
 
+    // Инициализация компонентов при создании
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
 
+        // Создаем и инициализируем менеджер способностей
         abilityManager = gameObject.AddComponent<AbilityManager>();
         abilityManager.Init(body, sprite);
     }
@@ -70,6 +74,7 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         if (isOnGround && Input.GetButtonDown("Jump")) // Прыгаем, если стоим на земле и нажата клавиша прыжка
             Jump(); // Выполняем прыжок
 
+        // Переключение способностей по клавишам
         if (Input.GetKeyDown(KeyCode.Alpha1))
             abilityManager.SwitchToWindAbility();
 
@@ -95,6 +100,8 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
     private void Jump()
     {
         animator.SetTrigger("Jump"); // Активируем триггер Jump в Animator
+
+        // Если есть активная способность - используем ее прыжок
         if (abilityManager != null && abilityManager.HasActiveAbility())
         {
             abilityManager.JumpAbility();
@@ -105,6 +112,7 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         }
     }
 
+    // Движение героя
     private void Run(float horizontalInput) // Принимаем ввод как аргумент
     {
         Vector3 direction = transform.right * Mathf.Sign(horizontalInput); // Направление зависит от знака ввода
@@ -121,8 +129,10 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         sprite.flipX = direction.x < 0.0f; // Отражаем спрайт влево, если идём налево
     }
 
+    // Проверка нахождения на земле
     private void CheckIsOnGround()
     {
+        // Ищем коллайдеры в небольшой области под героем
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
         bool wasGrounded = isOnGround;
         isOnGround = colliders.Length > 1;
@@ -130,7 +140,6 @@ public class Hero : MonoBehaviour // Главный класс героя, на�
         if (!wasGrounded && isOnGround)
         {
             abilityManager.LandAbility();
-            // При необходимости способности обрабатывают OnLand внутри себя
         }
     }
 

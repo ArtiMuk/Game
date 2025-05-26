@@ -14,10 +14,10 @@ public class EarthAbility : MonoBehaviour, IAbility
     
 
     private float originalGravityScale; // Оригинальное значение гравитации, чтобы можно было возвращать после ускорения
-    private bool isShaking = false; // Флаг, включена ли сейчас тряска камеры
+    private bool isShaking = false;
     private float shakeTimer = 0f; // Таймер обратного отсчёта для тряски камеры
     private Vector3 originalCameraPosition; // Исходная позиция камеры до тряски
-    private bool isFastFalling = false; // Флаг, падает ли игрок ускоренно
+    private bool isFastFalling = false;
     private bool wasGroundedLastFrame = false; // Был ли игрок на земле в предыдущем кадре
     private LayerMask wallLayer; // Маска слоя для стен
     private bool isTouchingWall = false; // Касаемся ли стены
@@ -77,7 +77,7 @@ public class EarthAbility : MonoBehaviour, IAbility
         if (grounded && !wasGroundedLastFrame && isFastFalling) // Если только что приземлились с ускоренного падения
         {
             TriggerShake(); // Запускаем тряску
-            isFastFalling = false; // Выключаем флаг ускоренного падения
+            isFastFalling = false;
         }
 
         wasGroundedLastFrame = grounded; // Запоминаем текущее состояние на земле
@@ -85,7 +85,7 @@ public class EarthAbility : MonoBehaviour, IAbility
 
     private void HandleCameraShake() // Обновление тряски камеры
     {
-        if (!isShaking) return; // Если тряска не активна — ничего не делаем
+        if (!isShaking) return;
 
         shakeTimer -= Time.deltaTime; // Уменьшаем таймер на время кадра
 
@@ -134,31 +134,31 @@ public class EarthAbility : MonoBehaviour, IAbility
 
     private void PerformJump() // Прыжок вверх
     {
-        Debug.Log("Earth Jump!"); // Сообщение в консоль
+        Debug.Log("Earth Jump!");
         // Обычный прыжок
         body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         
         isFastFalling = false; // Отключаем ускоренное падение
     }
 
-    private void StopFastFall() // Остановка ускоренного падения
+    private void StopFastFall()
     {
-        if (isFastFalling) // Если оно было активно
+        if (isFastFalling)
         {
-            isFastFalling = false; // Выключаем
+            isFastFalling = false;
         }
     }
 
     private void TriggerShake() // Запуск тряски камеры
     {
-        isShaking = true; // Включаем флаг
-        shakeTimer = shakeDuration; // Устанавливаем таймер на длительность тряски
+        isShaking = true;
+        shakeTimer = shakeDuration;
     }
 
-    private void StopShake() // Остановка тряски камеры
+    private void StopShake()
     {
-        isShaking = false; // Выключаем флаг
-        mainCamera.transform.position = originalCameraPosition; // Возвращаем камеру в исходное положение
+        isShaking = false;
+        mainCamera.transform.position = originalCameraPosition;
     }
 
     private bool IsGrounded() // Проверка, стоит ли игрок на земле
