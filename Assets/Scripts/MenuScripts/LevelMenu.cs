@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class LevelMenu : MonoBehaviour
 {
-    public GameObject menuPanel;
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject settingsPanel;
 
     private void Update()
     {
@@ -12,11 +13,21 @@ public class LevelMenu : MonoBehaviour
 
     public void ChangeMenuMode()
     {
-        if (menuPanel == null) return;
-
         bool isActive = menuPanel.activeSelf;
         menuPanel.SetActive(!isActive);
         Time.timeScale = isActive ? 1.0f : 0.0f;
+    }
+
+    public void ChangeSettingsPanelMode()
+    {
+        menuPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+    }
+
+    public void BackToMenuFromSettings()
+    {
+        settingsPanel.SetActive(false);
+        menuPanel.SetActive(true);
     }
 
     public void OpenMainMenu()

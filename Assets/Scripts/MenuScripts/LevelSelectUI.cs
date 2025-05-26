@@ -7,10 +7,12 @@ public class LevelSelectUI : MonoBehaviour
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private Transform buttonParent;
 
-    public static int totalLevels = 5;
+    public static int totalLevels = 1;
 
     void Start()
     {
+        totalLevels = SceneManager.sceneCountInBuildSettings - 1;
+
         for (int i = 1; i <= totalLevels; i++)
         {
             if (i <= PlayerPrefs.GetInt("LastLevel", 0) + 1)
