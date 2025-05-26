@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
         int nextLevel = PlayerPrefs.GetInt("LastLevel", 0) + 1;
         if (nextLevel == SceneManager.sceneCountInBuildSettings)
         {
-            nextLevel = 1;
+            nextLevel -= 1;
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextLevel);
     }

@@ -28,6 +28,7 @@ public class Respawn : MonoBehaviour
         else
         {
             // Если активна другая способность, всегда респавним на старте
+            FireAbility.ResetCheckpoints();
             StartCoroutine(RespawnAtStart());
         }
     }

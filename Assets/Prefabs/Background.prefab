@@ -401,6 +401,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -60
       objectReference: {fileID: 0}
+    - target: {fileID: 4636411356655378764, guid: 90c68758135e12d48851b3651d0b0b29, type: 3}
+      propertyPath: m_SortingOrder
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5559825410563406785, guid: 90c68758135e12d48851b3651d0b0b29, type: 3}
       propertyPath: m_Name
       value: Menu
