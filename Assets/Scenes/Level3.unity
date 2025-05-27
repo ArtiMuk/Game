@@ -2005,6 +2005,18 @@ PrefabInstance:
       propertyPath: m_FlipY
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2755509953262425398, guid: 85636de9ce3542c44aa890bd216cf921, type: 3}
+      propertyPath: m_Size.x
+      value: 5.8802013
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755509953262425398, guid: 85636de9ce3542c44aa890bd216cf921, type: 3}
+      propertyPath: m_Offset.x
+      value: -2.702561
+      objectReference: {fileID: 0}
+    - target: {fileID: 2755509953262425398, guid: 85636de9ce3542c44aa890bd216cf921, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.00076413155
+      objectReference: {fileID: 0}
     - target: {fileID: 4731598698307993684, guid: 85636de9ce3542c44aa890bd216cf921, type: 3}
       propertyPath: m_LocalPosition.x
       value: -69.56386
