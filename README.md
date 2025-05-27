@@ -3,4 +3,4 @@
 
 Папка Elementum - релиз с exe
 
-Также ссылка на ЯДиск: https://disk.yandex.ru/d/LPQh1-adnI1q3w
+Также ссылка на ЯДиск: https://disk.yandex.ru/d/bRiWlN0DewOZ8w
